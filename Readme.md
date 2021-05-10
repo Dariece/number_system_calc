@@ -1,9 +1,14 @@
 [TOC]
+
 #Number-Calculator
+
 ##Installation
+
 `cd workspace/numberCalculator`\
 `pyinstaller --onefile numberCalculator.py`
+
 ##Benutzung Windows
+
 **Aufruf**: `dist\numberCalculator`\
 **Eingabe Beispiele**:
 1. `236 decimal` 

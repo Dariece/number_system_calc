@@ -1,0 +1,3 @@
+[console_scripts]
+numberCalculator = numberCalculator:main
+

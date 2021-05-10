@@ -1,0 +1,7 @@
+numberCalculator.py
+setup.py
+number_calculator.egg-info/PKG-INFO
+number_calculator.egg-info/SOURCES.txt
+number_calculator.egg-info/dependency_links.txt
+number_calculator.egg-info/entry_points.txt
+number_calculator.egg-info/top_level.txt

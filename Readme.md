@@ -1,13 +1,13 @@
 [TOC]
 
-#Number-Calculator
+# Number-Calculator
 
-##Installation
+## Installation
 
 `cd workspace/numberCalculator`\
 `pyinstaller --onefile numberCalculator.py`
 
-##Benutzung Windows
+## Benutzung Windows
 
 **Aufruf**: `dist\numberCalculator`\
 **Eingabe Beispiele**:

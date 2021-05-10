@@ -1,5 +1,5 @@
-#Number-Calculator
 [TOC]
+#Number-Calculator
 ##Installation
 `cd workspace/numberCalculator`\
 `pyinstaller --onefile numberCalculator.py`

@@ -83,9 +83,20 @@ class BinaryConverter(NumberConverter):
 
         return ret_val
 
+    def to_oct(self, num=None, prnt=False) -> str:
+        dec_num = self.to_dec(num, prnt=prnt)
+        dec_converter = DecimalConverter(dec_num)
+        return dec_converter.to_oct(prnt=prnt)
+
 
 class OctalNumber(NumberConverter):
-    pass
+    system = NumberSystem.OCTAL
+
+    def __init__(self, num):
+        if isinstance(num, int):
+            super().__init__(num)
+        else:
+            raise ValueError(f'Input {num} no {self.system.name.lower()} number')
 
 
 class DecimalConverter(NumberConverter):
@@ -95,7 +106,7 @@ class DecimalConverter(NumberConverter):
         if isinstance(num, int):
             super().__init__(num)
         else:
-            raise ValueError(f'Input no {self.system.name.lower()} number')
+            raise ValueError(f'Input {num} no {self.system.name.lower()} number')
 
     def convert(self, num=None, prnt=False, system=NumberSystem.BINARY):
         divisor = system.value
@@ -110,17 +121,20 @@ class DecimalConverter(NumberConverter):
 
         tmp_num = num
 
-        while tmp_num is not 0:
-            message = f'{tmp_num:5} / {divisor:2} ='
-            rest = tmp_num % divisor
-            if system is NumberSystem.HEXADECIMAL:
-                rest = Hexadecimal.to_hex(rest)
-            tmp_num = tmp_num // divisor
-            ret_val = f'{rest}{ret_val}'
-            message = f'{message} {tmp_num:5} R {rest}'
+        if num != 0:
+            while tmp_num is not 0:
+                message = f'{tmp_num:5} / {divisor:2} ='
+                rest = tmp_num % divisor
+                if system is NumberSystem.HEXADECIMAL:
+                    rest = Hexadecimal.to_hex(rest)
+                tmp_num = tmp_num // divisor
+                ret_val = f'{rest}{ret_val}'
+                message = f'{message} {tmp_num:5} R {rest}'
 
-            if prnt:
-                print(message)
+                if prnt:
+                    print(message)
+        else:
+            ret_val = '0'
 
         if system is NumberSystem.BINARY:
             assert ret_val == bin(num).split(sep='b')[1]
@@ -170,9 +184,17 @@ class HexadecimalConverter(NumberConverter):
 
     def to_dec(self, num=None, prnt=False) -> int:
         ret_val = Integer(0)
-        num = self.convert(num, prnt)
+        num = self.convert(num, prnt, system=NumberSystem.DECIMAL)
         base = 16
-        [ret_val.add(Hexadecimal.to_dec(x) * base ** BinaryConverter.get_exponent(i, num)
-                     , exp=BinaryConverter.get_exponent(i, num), base=base, prnt=prnt)
+        [ret_val.add_hex(Hexadecimal.to_dec(x) * base ** BinaryConverter.get_exponent(i, num),
+                         exp=BinaryConverter.get_exponent(i, num),
+                         base=base,
+                         multiplicator=Hexadecimal.to_dec(x),
+                         prnt=prnt)
          for i, x in enumerate(num)]
         return ret_val.value
+
+    def to_oct(self, num=None, prnt=False) -> str:
+        dec_num = self.to_dec(num, prnt=prnt)
+        dec_converter = DecimalConverter(dec_num)
+        return dec_converter.to_oct(prnt=prnt)

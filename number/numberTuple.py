@@ -23,7 +23,7 @@ class NumberTuple:
         self.decimal_number = converter.to_dec(prnt=True)
         self.binary_number = converter.to_bin(prnt=True)
         self.hexadecimal_number = converter.to_hex(prnt=True)
-        # self.octal_number = converter.to_oct(prnt=True)
+        self.octal_number = converter.to_oct(prnt=True)
 
     def __str__(self):
         return f"""dec: {self.decimal_number}

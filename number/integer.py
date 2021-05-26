@@ -14,6 +14,12 @@ class Integer:
 
         self.value += num
 
+    def add_hex(self, num, exp=0, base=2, prnt=False, multiplicator=1):
+        if prnt:
+            print(f"({multiplicator} * {base}^{exp}) + ({num})")
+
+        self.value += num
+
     def get_hex(self) -> str:
         return Hexadecimal.to_hex(self.value)
 

@@ -14,7 +14,7 @@ def main():
                 '   Zahlensysteme: [decimal, hexadecimal, binary]\n'  
                 '   Beispiel 123 decimal\n'
                 '   Exit zum beenden\n'
-                'Bitte Zahl und Zahlensystem eingeben: (zahl zahlensystem)') \
+                'Bitte (zahl zahlensystem) eingeben: ') \
                 .split(' ')
             if any(x.lower() == exit for x in args):
                 return 0
